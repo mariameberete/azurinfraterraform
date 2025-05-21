@@ -1,0 +1,121 @@
+{
+  "version": 4,
+  "terraform_version": "1.12.0",
+  "serial": 6,
+  "lineage": "a6d13ee2-df5b-0a7e-11b7-190f3d9c3587",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "data",
+      "type": "azurerm_resource_group",
+      "name": "rg-terraformMariame",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/537bb5af-974a-40ed-9493-5761b69e345a/resourceGroups/rg-terraformMariame",
+            "location": "francecentral",
+            "managed_by": "",
+            "name": "rg-terraformMariame",
+            "tags": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_subnet",
+      "name": "mariame_subnet",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address_prefixes": [
+              "10.0.1.0/24"
+            ],
+            "default_outbound_access_enabled": true,
+            "delegation": [],
+            "id": "/subscriptions/537bb5af-974a-40ed-9493-5761b69e345a/resourceGroups/rg-terraformMariame/providers/Microsoft.Network/virtualNetworks/mariame_virtual-vnet/subnets/mariame_subnet-subnet",
+            "name": "mariame_subnet-subnet",
+            "private_endpoint_network_policies": "Disabled",
+            "private_link_service_network_policies_enabled": true,
+            "resource_group_name": "rg-terraformMariame",
+            "service_endpoint_policy_ids": [],
+            "service_endpoints": [],
+            "timeouts": null,
+            "virtual_network_name": "mariame_virtual-vnet"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_virtual_network.mariame_virtual",
+            "data.azurerm_resource_group.rg-terraformMariame"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_virtual_network",
+      "name": "mariame_virtual",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address_space": [
+              "10.0.0.0/16"
+            ],
+            "bgp_community": "",
+            "ddos_protection_plan": [],
+            "dns_servers": [],
+            "edge_zone": "",
+            "encryption": [],
+            "flow_timeout_in_minutes": 0,
+            "guid": "2767c94f-7c99-4f40-8635-9bce0090f752",
+            "id": "/subscriptions/537bb5af-974a-40ed-9493-5761b69e345a/resourceGroups/rg-terraformMariame/providers/Microsoft.Network/virtualNetworks/mariame_virtual-vnet",
+            "location": "francecentral",
+            "name": "mariame_virtual-vnet",
+            "private_endpoint_vnet_policies": "Disabled",
+            "resource_group_name": "rg-terraformMariame",
+            "subnet": [
+              {
+                "address_prefixes": [
+                  "10.0.1.0/24"
+                ],
+                "default_outbound_access_enabled": true,
+                "delegation": [],
+                "id": "/subscriptions/537bb5af-974a-40ed-9493-5761b69e345a/resourceGroups/rg-terraformMariame/providers/Microsoft.Network/virtualNetworks/mariame_virtual-vnet/subnets/mariame_subnet-subnet",
+                "name": "mariame_subnet-subnet",
+                "private_endpoint_network_policies": "Disabled",
+                "private_link_service_network_policies_enabled": true,
+                "route_table_id": "",
+                "security_group": "",
+                "service_endpoint_policy_ids": [],
+                "service_endpoints": []
+              }
+            ],
+            "tags": {
+              "backup": "daily",
+              "env": "test"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "data.azurerm_resource_group.rg-terraformMariame"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
