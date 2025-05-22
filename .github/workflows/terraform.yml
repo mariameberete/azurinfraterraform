@@ -2,9 +2,10 @@ name: 'Terraform'
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "dev"]
   pull_request:
-
+env:
+  AA_WF_VAR: "This is a workflowvariable "
 permissions:
   contents: read
 
