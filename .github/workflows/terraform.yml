@@ -57,7 +57,7 @@ jobs:
   apply:
     name: 'Terraform apply'
     runs-on: self-hosted
-    environment: production
+    environment: ${{github.ref_name}}
     needs: "plan"
   
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
