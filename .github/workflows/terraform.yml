@@ -1,0 +1,80 @@
+name: 'Terraform'
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    name: 'Terraform plan'
+    runs-on: self-hosted 
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+    - name: Adding markdown
+      run: echo '### Terraform Plan! 🚀' >> $GITHUB_STEP_SUMMARY
+
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: terraform init
+
+    # Checks that all Terraform configuration files adhere to a canonical format
+    - name: Terraform Format
+      run: terraform fmt -check
+      continue-on-error: true
+
+    # Generates an execution plan for Terraform
+    - name: Terraform Plan
+      env:
+        TF_VAR_name: mariametf
+      run: terraform plan -input=false -out plan.out
+
+    - name: Plan summary
+      run: terraform show -no-color plan.out  >> $GITHUB_STEP_SUMMARY
+      
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: plan.out
+        path: plan.out
+        retention-days: 5
+  apply:
+    name: 'Terraform apply'
+    runs-on: self-hosted
+    environment: production
+    needs: "plan"
+  
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+        run:
+           shell: bash
+
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: plan.out
+  
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+    
+      # On push to "main", build or change infrastructure according to Terraform configuration files
+      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+    - name: Terraform Apply
+      #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
+      run: terraform apply -input=false plan.out
