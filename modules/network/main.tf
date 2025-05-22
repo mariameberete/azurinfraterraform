@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "rg-terraformMariame" {
-name = "rg-terraformMariame"
+name = var.rg-resource_group
 location = "France central"
 }
 resource "azurerm_virtual_network" "mariame_virtual" {

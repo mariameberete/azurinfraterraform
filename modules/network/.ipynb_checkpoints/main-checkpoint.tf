@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "rg-terraformMariame" {
-name = "rg-terraformMariame"
+name = var.rg-resource_group
 location = "France central"
 }
 resource "azurerm_virtual_network" "mariame_virtual" {
@@ -52,7 +52,3 @@ resource "azurerm_subnet_network_security_group_association" "security_group_ass
   network_security_group_id = azurerm_network_security_group.acceptanceTestSecurityGroup1_mariame.id
 }
 
-provider "azurerm" {
-  features{}
-subscription_id="537bb5af-974a-40ed-9493-5761b69e345a"
-}
