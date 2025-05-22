@@ -26,6 +26,8 @@ jobs:
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
+    - name: Adding markdown
+      run: echo '### Terraform Plan! 🚀' >> $GITHUB_STEP_SUMMARY
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
@@ -41,6 +43,9 @@ jobs:
       env:
         TF_VAR_name: mariametf
       run: terraform plan -input=false -out plan.out
+
+    - name: Plan summary
+      run: echo '### Terraform show -no-color plan.out 🚀' >> $GITHUB_STEP_SUMMARY
       
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
